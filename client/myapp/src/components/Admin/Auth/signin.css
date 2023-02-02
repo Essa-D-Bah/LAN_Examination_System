@@ -1,0 +1,30 @@
+.adminForm{
+    width: 40%;
+    margin: 0 auto;
+}
+
+.fAdmin {
+    width: 100%;
+}
+
+.fAdmin div{
+    width: 90%;
+    margin: 0 auto;
+}
+.fAdmin div input{
+   width: 100%;
+   margin: .5em;
+   padding: .5em;
+}
+
+.sbtn{
+    width: 10em;
+    height: 32px;
+    margin-left: .5em;
+    margin-top: 1em;
+}
+
+.aTitle{
+    text-align: center;
+    color: blue;
+}

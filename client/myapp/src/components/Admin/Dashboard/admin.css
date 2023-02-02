@@ -1,0 +1,15 @@
+.adminCon{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.paper{
+    border: solid 1px;
+    width: 45%;
+}
+
+.student{
+    width: 45%;
+    border: solid 1px black;
+}

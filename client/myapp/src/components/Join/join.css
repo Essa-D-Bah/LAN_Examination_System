@@ -1,0 +1,32 @@
+.joinInnerContainer{
+    width: 40%;
+    margin: 0 auto;
+    border: solid 1px black;
+}
+
+.joinInnerContainer h1{
+    color: blue;
+    text-align: center;
+}
+
+.form div{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.form div input{
+    width: 90%;
+    margin-top: 1em;
+    padding: .5em;
+}
+
+
+
+.button{
+    width: 20%;
+    margin-top: 1em;
+    padding: 10px 32px;
+    margin: 1em;
+    margin-left: 2.4em;
+}
+

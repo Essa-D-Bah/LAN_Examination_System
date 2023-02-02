@@ -21,6 +21,7 @@ export default function Chat({ location }) {
       socket.off();
     };
   }, [data.search, ENDPOINT]);
+
   return (
     <div>
       <h1>

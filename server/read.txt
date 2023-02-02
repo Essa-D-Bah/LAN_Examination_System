@@ -1,0 +1,15 @@
+We will create the following models,
+Paper,
+Questions
+Admin
+Student
+
+Each paper will contain an array of Questions
+And an array of Students that will take that Paper
+
+A Student will have Name and matNo
+
+Admin Will have Username and password
+
+
+
