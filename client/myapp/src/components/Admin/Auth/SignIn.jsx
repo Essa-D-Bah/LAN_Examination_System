@@ -15,8 +15,11 @@ export default function SignIn() {
   const [validUser, setValidUser] = useState(false);
 
   const signIn =()=>{
-    socket = io(ENDPOINT);
+   // socket = io(ENDPOINT);
     socket.emit("signIn", { userName, password });
+    socket.on('adminExist', ({exist})=>{
+      setValidUser(exist);
+    })
   }
 
   return (
@@ -43,7 +46,7 @@ export default function SignIn() {
             onClick={(event) =>
               !validUser? event.preventDefault() : null
             }
-             to={`/admin?name=${userName}&matNo=${password}`}
+             to={`/admin?userName=${userName}`}
           >
             <button className="btn mt-20 sbtn" type="submit" onClick={signIn}>
               Sign In

@@ -1,7 +1,7 @@
 const Student = require("../models/Student");
 
 const createStudent = async (name, matNo) => {
-  const foundUser = await User.findOne({ matNo: matNo });
+  const foundUser = await Student.findOne({ matNo: matNo });
   if (!foundUser) {
     const newUser = new Student({ name, matNo });
     try {

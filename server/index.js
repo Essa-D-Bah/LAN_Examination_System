@@ -3,7 +3,7 @@ const http = require("http");
 const socket = require("socket.io");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const { createUser, getUser } = require("./controllers/userController");
+const { createStudent, getStudent } = require("./controllers/userController");
 
 const app = express();
 
@@ -21,17 +21,26 @@ io.on("connection", (socket) => {
   console.log("We have a new connection");
 
   socket.on("join", async ({ name, matNo }, callback) => {
-    let res = await createUser(name, matNo);
+    let res = await createStudent(name, matNo);
     socket.emit("createUser", { res });
   });
 
   socket.on("getUser", async ({ serMat }) => {
-    const user = await getUser(serMat);
+    const user = await getStudent(serMat);
     console.log(user);
   });
 
   socket.on("signIn", ({ userName, password }) => {
     console.log(userName, password);
+    socket.emit("adminExist", { exist: true });
+  });
+
+  socket.on("addPaper", ({ paper }) => {
+    console.log(paper);
+  });
+
+  socket.on("addStudent", ({ studentData }) => {
+    console.log(studentData);
   });
 
   socket.on("disconnect", () => {
