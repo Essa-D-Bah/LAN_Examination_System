@@ -68,7 +68,7 @@ export default function AddStudent(props) {
           ))}
         </select>
         <button
-          className="bg-sky-400 px-2 py-4 rounded-md text-white text-center font-bold text-lg tracking-wider hover:scale-105 hover:shadow-md hover:bg-sky-600 transition-all duration-200  cursor-pointer"
+          className="bg-sky-400 px-2 py-4 rounded-md text-white text-center font-bold font-mono tracking-wider hover:scale-105 hover:shadow-md hover:bg-sky-600 transition-all duration-200  cursor-pointer"
           onClick={(e) => submitData(e)}
         >
           Add Student

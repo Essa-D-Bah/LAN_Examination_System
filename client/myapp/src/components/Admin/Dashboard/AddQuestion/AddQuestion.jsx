@@ -30,7 +30,7 @@ export default function AddQuestion(props) {
   };
   return (
     <div>
-      <form className='flex flex-col space-y-6 data-aos="fadeIn"'>
+      <form className='flex flex-col space-y-6 'data-aos="fade-down">
         <h3 className="font-sans font-semibold text-xl text-center">
           Select Paper To Add Questions To
         </h3>
@@ -89,7 +89,7 @@ export default function AddQuestion(props) {
         />
         <button
           onClick={(e) => submitQuestion(e)}
-          className="bg-sky-400 px-2 py-4 rounded-md text-white text-center font-bold text-lg tracking-wider hover:scale-105 hover:shadow-md hover:bg-sky-600 transition-all duration-200 "
+          className="bg-sky-400 px-2 py-4 rounded-md text-white text-center font-bold font-mono tracking-wider hover:scale-105 hover:shadow-md hover:bg-sky-600 transition-all duration-200 "
         >
           Submit
         </button>
