@@ -3,7 +3,21 @@ const http = require("http");
 const socket = require("socket.io");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const { createUser, getUser } = require("./controllers/userController");
+const {
+  createStudent,
+  getStudent,
+  addAnswerToStudent,
+} = require("./controllers/studentController");
+
+const {
+  getPaper,
+  getAllPapers,
+  createPaper,
+  addQuestionToPaper,
+  addStudentToPaper,
+} = require("./controllers/paperController");
+
+const Paper = require("./models/Paper");
 
 const app = express();
 
@@ -20,18 +34,55 @@ const io = socket(server, {
 io.on("connection", (socket) => {
   console.log("We have a new connection");
 
-  socket.on("join", async ({ name, matNo }, callback) => {
-    let res = await createUser(name, matNo);
-    socket.emit("createUser", { res });
+  socket.on("join", async ({ paperName, studentMat }) => {
+    const foundPaper = await Paper.findOne({ paperName: paperName });
+    if (foundPaper) {
+      const inc = foundPaper.students.includes(studentMat);
+      if (inc) {
+        const questions = foundPaper.questions;
+        socket.emit("getPaper", { questions });
+      }
+    }
   });
 
   socket.on("getUser", async ({ serMat }) => {
-    const user = await getUser(serMat);
+    const user = await getStudent(serMat);
     console.log(user);
   });
 
   socket.on("signIn", ({ userName, password }) => {
-    console.log(userName, password);
+    // console.log(userName, password);
+    socket.emit("adminExist", { exist: true });
+  });
+
+  socket.on("addPaper", async ({ paper }) => {
+    const res = await createPaper(paper);
+  });
+
+  socket.on("addStudent", async ({ studentData }) => {
+    let { studentName, studentMat, paper } = studentData;
+    let userCreated = await createStudent(studentName, studentMat);
+    if (userCreated) {
+      const addStu = await addStudentToPaper(studentMat, paper);
+      socket.emit("studentAdded", { addStu });
+    }
+  });
+
+  socket.on("addQuestion", async ({ question }) => {
+    const { paperName, ...other } = question;
+    const res = await addQuestionToPaper(paperName, other);
+    socket.emit("questionAdded", { res });
+  });
+
+  socket.on("getAllPapers", async () => {
+    const papers = await getAllPapers();
+    socket.emit("sendPapers", { papers });
+  });
+
+  socket.on("addAnswer", async ({ answers, studentMat }) => {
+    console.log(answers, studentMat);
+    const res = await addAnswerToStudent(studentMat, answers);
+    console.log(res);
   });
 
   socket.on("disconnect", () => {
